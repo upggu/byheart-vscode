@@ -624,7 +624,7 @@ git add -A && git commit -m "docs: write README with usage, AI textbook prompt, 
 
 > **Task 10 검증 기록 (2026-11-09):** 사용자 요청으로 명언을 경제·기술·경영 주제(1758~1923년 공개 도메인 영어 원저)로 교체. 20개 모두 Gutenberg 평문과 대조(대소문자·구두점 무시) 확인. `npm test -- tests/content` 3 passed. 사용자 검토 후 커밋.
 
-> **Task 11 검증 기록 (2026-11-09):** `npm run package` → `byheart-0.1.0.vsix`(14 files, 129 KB). 포함 파일: dist/, media/, content/quotes/(2 챕터+SOURCES.md), package.json, package.nls*.json, LICENSE, README, CHANGELOG — src/·dev/·tests/ 없음. `vsce`가 저장소 URL 없이 상대 링크를 거부해 `--no-rewrite-relative-links --allow-missing-repository`를 추가. `.vsix` 설치는 test-electron이 내려받은 VS Code 1.145.2의 CLI로 임시 user-data/extensions 디렉터리에 설치해 `byheart-placeholder.byheart@0.1.0`이 목록에 뜨는 것까지 확인. 실제 VS Code 창에서 패널·QuickPick 동작은 **미확인**. `git diff --check` 통과, 138 tests, typecheck 통과.
+> **Task 11 검증 기록 (2026-11-09):** `npm run package` → `byheart-0.1.0.vsix`(14 files, 129 KB). 포함 파일: dist/, media/, content/quotes/(2 챕터+SOURCES.md), package.json, package.nls*.json, LICENSE, README, CHANGELOG — src/·dev/·tests/ 없음. `vsce`가 저장소 URL 없이 상대 링크를 거부해 당시에는 `--no-rewrite-relative-links --allow-missing-repository`를 추가했고, 원격이 생긴 뒤 `repository` 필드를 넣고 플래그를 제거했다. `.vsix` 설치는 test-electron이 내려받은 VS Code 1.145.2의 CLI로 임시 user-data/extensions 디렉터리에 설치해 `byheart-placeholder.byheart@0.1.0`이 목록에 뜨는 것까지 확인. 실제 VS Code 창에서 패널·QuickPick 동작은 **미확인**. `git diff --check` 통과, 138 tests, typecheck 통과.
 
 ---
 
