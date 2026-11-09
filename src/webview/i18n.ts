@@ -1,0 +1,67 @@
+export type Locale = 'ko' | 'en';
+
+export const table = {
+  en: {
+    check: 'Check ⏎',
+    next: 'Next',
+    nextEnter: 'Next ⏎',
+    previous: 'Previous',
+    mark: 'Mark as hard',
+    marked: 'Marked hard',
+    rewrite: 'Rewrite',
+    rehide: 'Hide again',
+    reveal: 'Reveal ⏎',
+    translation: 'Translation',
+    modeTyping: 'Typing',
+    modeHint: 'Hint',
+    position: '{n} / {total}',
+    wpm: '{wpm} WPM',
+    summary: 'Round complete — {cards} cards · {accuracy}% accuracy · {wpm} WPM avg',
+    summaryNoWpm: 'Round complete — {cards} cards · {accuracy}% accuracy',
+    summaryHint: 'Round complete — {cards} cards',
+    nextChapter: 'Next chapter',
+    restart: 'Restart from the first card',
+    pickChapter: 'Choose a chapter',
+    limited: 'Live comparison was skipped for this long input. Check the answer to compare the whole text.',
+    extraInput: 'Extra input',
+    error: 'Error',
+    openFolder: 'Open books folder',
+    readOnly: 'built-in',
+    shortcutHint: 'Alt+1 previous · Alt+2 mark · Alt+3 rewrite · Shift+Enter new line',
+  },
+  ko: {
+    check: '정답 확인 ⏎',
+    next: '다음',
+    nextEnter: '다음 ⏎',
+    previous: '이전',
+    mark: '미암기',
+    marked: '미암기 해제',
+    rewrite: '다시 쓰기',
+    rehide: '다시 가리기',
+    reveal: '공개 ⏎',
+    translation: '해석',
+    modeTyping: '타이핑',
+    modeHint: '힌트',
+    position: '{n} / {total}',
+    wpm: '{wpm} WPM',
+    summary: '한 바퀴 완료 — 카드 {cards} · 정확도 {accuracy}% · 평균 {wpm} WPM',
+    summaryNoWpm: '한 바퀴 완료 — 카드 {cards} · 정확도 {accuracy}%',
+    summaryHint: '한 바퀴 완료 — 카드 {cards}',
+    nextChapter: '다음 챕터',
+    restart: '처음부터 반복',
+    pickChapter: '챕터 선택',
+    limited: '입력이 길어 실시간 표시를 생략했습니다. 정답 확인에서 전체를 비교할 수 있습니다.',
+    extraInput: '불필요한 입력',
+    error: '오류',
+    openFolder: '교재 폴더 열기',
+    readOnly: '내장',
+    shortcutHint: 'Alt+1 이전 · Alt+2 미암기 · Alt+3 다시 쓰기 · Shift+Enter 줄바꿈',
+  },
+} as const;
+
+export type Key = keyof typeof table.en;
+
+export function t(locale: Locale, key: Key, vars: Record<string, string | number> = {}): string {
+  const template: string = table[locale][key] ?? table.en[key];
+  return template.replace(/\{(\w+)\}/g, (_, name: string) => (name in vars ? String(vars[name]) : ''));
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "documentId": "9a2d2c4e-1b5f-4d3a-8e7c-0f1a2b3c4d5e",
+  "revision": 0,
+  "source": { "kind": "text", "basename": "Day 1" },
+  "turns": [
+    {
+      "id": "t1",
+      "speaker": "",
+      "text": "The **only** way out is through.",
+      "translation": "유일한 출구는 통과하는 것이다.",
+      "explanation": "- **way out**: 출구, 해결책"
+    },
+    {
+      "id": "t2",
+      "kind": "explanation",
+      "section": "Part 1",
+      "speaker": "",
+      "text": "Section note"
+    },
+    {
+      "id": "t3",
+      "section": "Part 1",
+      "speaker": "Teacher",
+      "text": "Keep going."
+    }
+  ],
+  "retiredTurnIds": []
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>ByHeart webview harness</title>
+  <link rel="stylesheet" href="../media/webview.css" />
+  <style>
+    /* Stand-ins for VS Code theme variables (Dark Modern-ish). Harness only. */
+    :root {
+      --vscode-foreground: #cccccc; --vscode-editor-background: #1f1f1f; --vscode-font-family: system-ui, sans-serif; --vscode-font-size: 13px;
+      --vscode-editor-font-family: Menlo, Monaco, monospace; --vscode-editor-font-size: 14px;
+      --vscode-errorForeground: #f14c4c; --vscode-editorWarning-foreground: #cca700; --vscode-descriptionForeground: #9d9d9d;
+      --vscode-input-placeholderForeground: #989898; --vscode-textLink-foreground: #4daafc; --vscode-input-border: #3c3c3c; --vscode-input-background: #313131;
+      --vscode-input-foreground: #cccccc; --vscode-focusBorder: #0078d4; --vscode-button-foreground: #ffffff; --vscode-button-background: #0078d4; --vscode-button-hoverBackground: #026ec1;
+      --vscode-button-secondaryForeground: #cccccc; --vscode-button-secondaryBackground: #313131; --vscode-button-secondaryHoverBackground: #3c3c3c;
+      --vscode-badge-background: #616161; --vscode-badge-foreground: #f8f8f8; --vscode-editorCursor-foreground: #aeafad; --vscode-editor-selectionBackground: #264f78;
+      --vscode-inputValidation-errorBackground: #5a1d1d;
+    }
+    #harness-log { max-width: 860px; margin: 24px auto 0; font: 12px/1.5 Menlo, monospace; color: #9d9d9d; white-space: pre-wrap; border-top: 1px dashed #3c3c3c; padding-top: 12px; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <pre id="harness-log" aria-label="harness log"></pre>
+  <script src="harness.js"></script>
+  <script src="../dist/webview.js"></script>
+</body>
+</html>

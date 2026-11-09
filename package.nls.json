@@ -1,0 +1,6 @@
+{
+  "command.start": "ByHeart: Start Practice",
+  "command.openFolder": "ByHeart: Open Books Folder",
+  "config.folder": "Folder that holds books/ and records/. Empty means ~/.byheart. A leading ~/ or a relative path is resolved from your home directory.",
+  "config.showWpm": "Show live WPM while typing and record the round's average WPM."
+}

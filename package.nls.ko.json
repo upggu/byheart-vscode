@@ -1,0 +1,6 @@
+{
+  "command.start": "ByHeart: 연습 시작",
+  "command.openFolder": "ByHeart: 교재 폴더 열기",
+  "config.folder": "books/와 records/를 담는 폴더. 비워 두면 ~/.byheart. ~/로 시작하거나 상대 경로면 홈 폴더 기준으로 해석한다.",
+  "config.showWpm": "타이핑 중 실시간 WPM을 보여 주고 바퀴의 평균 WPM을 기록한다."
+}

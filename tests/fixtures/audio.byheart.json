@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "documentId": "audio-doc",
+  "revision": 3,
+  "source": {
+    "kind": "audio",
+    "basename": "Episode 1",
+    "srtText": "1\n00:00:00,000 --> 00:00:01,000\nHello.\n",
+    "srtSha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "audioSize": 1024,
+    "audioLastModified": 1700000000000
+  },
+  "turns": [
+    { "id": "a1", "speaker": "A", "text": "Hello.", "startMs": 0, "endMs": 1000 },
+    { "id": "a2", "speaker": "B", "text": "Hi there.", "startMs": 1000, "endMs": 2000 }
+  ],
+  "retiredTurnIds": []
+}

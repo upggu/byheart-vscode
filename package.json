@@ -1,0 +1,82 @@
+{
+  "name": "byheart",
+  "displayName": "ByHeart",
+  "description": "Memorize sentences by typing them, inside VS Code.",
+  "version": "0.1.0",
+  "publisher": "byheart-placeholder",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.144.0"
+  },
+  "categories": [
+    "Education",
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onWebviewPanel:byheart.practice"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "byheart.start",
+        "title": "%command.start%"
+      },
+      {
+        "command": "byheart.openFolder",
+        "title": "%command.openFolder%"
+      }
+    ],
+    "configuration": {
+      "title": "ByHeart",
+      "properties": {
+        "byheart.folder": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "%config.folder%"
+        },
+        "byheart.showWpm": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.showWpm%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p src/webview/tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:integration": "node esbuild.mjs --tests && vscode-test",
+    "core:check": "node scripts/check-core.mjs",
+    "package": "npm run typecheck && npm run build && vsce package --no-rewrite-relative-links --allow-missing-repository",
+    "dev:webview": "npm run build && node dev/serve.mjs"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^26.6.6",
+    "@types/vscode": "~1.144.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.1.0",
+    "@vscode/vsce": "^4.1.0",
+    "esbuild": "^0.28.2",
+    "mocha": "^12.0.3",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

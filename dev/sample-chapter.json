@@ -1,0 +1,52 @@
+{
+  "ref": { "bookId": "sample", "chapterId": "Day 1.byheart.json" },
+  "bookTitle": "Sample",
+  "title": "Day 1",
+  "format": "byheart.json",
+  "readOnly": false,
+  "cards": [
+    {
+      "id": "s1",
+      "kind": "study",
+      "speaker": "Marcus Aurelius",
+      "section": "Part 1",
+      "text": "You have power over your mind, not outside events.",
+      "emphasis": [{ "start": 9, "end": 14, "kind": "bold" }],
+      "translation": "당신은 바깥일이 아니라 자기 마음을 다스릴 힘이 있다.",
+      "explanation": "- **power over**: ~에 대한 지배력\n- 출처: Meditations (c. 180), https://en.wikisource.org/wiki/Meditations"
+    },
+    {
+      "id": "s2",
+      "kind": "explanation",
+      "speaker": "",
+      "section": "Part 1",
+      "text": "The next two sentences come from the same book.",
+      "explanation": "Read them once before typing.\nSecond line of the note."
+    },
+    {
+      "id": "s3",
+      "kind": "study",
+      "speaker": "Marcus Aurelius",
+      "section": "Part 1",
+      "text": "Waste no more time arguing about what a good man should be. Be one.",
+      "translation": "좋은 사람이 어떠해야 하는지 따지느라 시간을 낭비하지 말라. 좋은 사람이 되어라."
+    },
+    {
+      "id": "s4",
+      "kind": "study",
+      "speaker": "",
+      "section": "Part 2",
+      "text": "I met a traveller from an antique land\nWho said: Two vast and trunkless legs of stone"
+    },
+    {
+      "id": "s5",
+      "kind": "study",
+      "speaker": "Seneca",
+      "section": "Part 2",
+      "text": "It is not that we have a *short* time to live, but that we waste a lot of it.",
+      "emphasis": [{ "start": 24, "end": 29, "kind": "italic" }],
+      "translation": "우리에게 주어진 시간이 짧은 것이 아니라, 우리가 그 많은 시간을 낭비하는 것이다.",
+      "explanation": "- **waste**: 낭비하다\n- 출처: On the Shortness of Life (c. 49), https://en.wikisource.org/wiki/On_the_shortness_of_life"
+    }
+  ]
+}

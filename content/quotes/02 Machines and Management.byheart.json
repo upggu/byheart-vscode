@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "documentId": "8b4de2aa-a73c-48da-bb75-8945062c7244",
+  "revision": 0,
+  "source": {
+    "kind": "text",
+    "basename": "02 Machines and Management"
+  },
+  "turns": [
+    {
+      "id": "a5871606-e0d0-4c7b-844c-6a2a733e9c7d",
+      "speaker": "Charles Babbage",
+      "text": "The first object of machinery, the chief cause of its extensive utility, is the perfection and the cheap production of the articles which it is intended to make.",
+      "translation": "기계의 첫째 목적이자 기계가 널리 쓸모 있는 주된 이유는, 만들고자 하는 물건을 완벽하게, 그리고 싸게 생산하는 데 있다.",
+      "explanation": "- **object**: 목적\n- **utility**: 유용성, 쓸모\n- **article**: 물품, 제품\n- 출처: On the Economy of Machinery and Manufactures, Chapter 28 (1832), https://www.gutenberg.org/ebooks/4238"
+    },
+    {
+      "id": "526cbf55-8abc-4933-ab88-937e05211d4b",
+      "speaker": "Charles Babbage",
+      "text": "On two occasions I have been asked,—\"Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?\"",
+      "translation": "나는 두 번이나 이런 질문을 받았다. \"배비지 씨, 기계에 틀린 숫자를 넣으면 맞는 답이 나옵니까?\"",
+      "explanation": "- **on two occasions**: 두 차례\n- **figures**: 숫자, 수치\n- 오늘날 \"garbage in, garbage out\"의 원조 격인 일화\n- 출처: Passages from the Life of a Philosopher, Chapter V (1864), https://www.gutenberg.org/ebooks/57532"
+    },
+    {
+      "id": "59c11893-8f10-4b21-8eef-095e94e8cc27",
+      "speaker": "Frederick W. Taylor",
+      "text": "In the past the man has been first; in the future the system must be first.",
+      "translation": "과거에는 사람이 먼저였다. 미래에는 시스템이 먼저여야 한다.",
+      "explanation": "- **come first / be first**: 우선하다\n- 출처: The Principles of Scientific Management, Introduction (1911), https://www.gutenberg.org/ebooks/6435"
+    },
+    {
+      "id": "b03af3f1-e41a-4753-bc3e-07b623a7d3db",
+      "speaker": "Frederick W. Taylor",
+      "text": "Science, not rule of thumb. Harmony, not discord. Cooperation, not individualism.",
+      "translation": "주먹구구가 아니라 과학. 불화가 아니라 조화. 개인플레이가 아니라 협력.",
+      "explanation": "- **rule of thumb**: 경험 법칙, 주먹구구\n- **discord**: 불화\n- **A, not B**: B가 아니라 A (대조 구문)\n- 출처: The Principles of Scientific Management, Chapter II (1911), https://www.gutenberg.org/ebooks/6435"
+    },
+    {
+      "id": "5769bd63-cd43-4a61-9b41-b8b24cc02c98",
+      "speaker": "Frederick W. Taylor",
+      "text": "The principal object of management should be to secure the maximum prosperity for the employer, coupled with the maximum prosperity for each employee.",
+      "translation": "경영의 주된 목적은 고용주의 최대 번영을, 그리고 그와 함께 각 직원의 최대 번영을 확보하는 것이어야 한다.",
+      "explanation": "- **principal**: 주된, 주요한\n- **coupled with**: ~와 함께, ~와 결합하여\n- **employer / employee**: 고용주 / 직원\n- 출처: The Principles of Scientific Management, Chapter I (1911), https://www.gutenberg.org/ebooks/6435"
+    },
+    {
+      "id": "528fe738-a235-420e-a0bb-abccde4596d9",
+      "speaker": "Henry Ford",
+      "text": "Failure is only the opportunity more intelligently to begin again.",
+      "translation": "실패란 더 현명하게 다시 시작할 기회일 뿐이다.",
+      "explanation": "- **begin again**: 다시 시작하다\n- **more intelligently**: 더 현명하게\n- 출처: My Life and Work, Introduction (1922), https://www.gutenberg.org/ebooks/7213"
+    },
+    {
+      "id": "be0c7492-7651-41dc-a80f-a07c6cfc86e4",
+      "speaker": "Henry Ford",
+      "text": "Thinking is the hardest work any one can do—which is probably the reason why we have so few thinkers.",
+      "translation": "생각하기는 누구에게나 가장 힘든 일이다. 아마 그래서 생각하는 사람이 그토록 적은 것이리라.",
+      "explanation": "- **the reason why ...**: ~한 이유\n- **so few**: 그토록 적은\n- 출처: My Life and Work, Introduction (1922), https://www.gutenberg.org/ebooks/7213"
+    },
+    {
+      "id": "17ce33e3-4337-431f-830c-5b73826071b3",
+      "speaker": "Henry Ford",
+      "text": "Money is only a tool in business. It is just a part of the machinery.",
+      "translation": "사업에서 돈은 도구일 뿐이다. 그저 기계 장치의 한 부품일 뿐이다.",
+      "explanation": "- **tool**: 도구\n- **machinery**: 기계 장치 (집합명사)\n- 출처: My Life and Work, Chapter XI (1922), https://www.gutenberg.org/ebooks/7213"
+    },
+    {
+      "id": "423de505-2ea1-4a2d-8ce9-830e9f165ea6",
+      "speaker": "Samuel Smiles",
+      "text": "\"Heaven helps those who help themselves\" is a well-tried maxim, embodying in a small compass the results of vast human experience.",
+      "translation": "\"하늘은 스스로 돕는 자를 돕는다\"는 오랜 세월 검증된 격언으로, 인류의 방대한 경험을 작은 틀 안에 담고 있다.",
+      "explanation": "- **well-tried**: 오랫동안 검증된\n- **maxim**: 격언\n- **in a small compass**: 좁은 범위 안에, 간결하게\n- 출처: Self-Help, Chapter I (1859), https://www.gutenberg.org/ebooks/935"
+    },
+    {
+      "id": "6bdf3a3f-fd43-48ca-9f59-5895849c1eea",
+      "speaker": "Mark Twain",
+      "text": "Truth is the most valuable thing we have. Let us economize it.",
+      "translation": "진실은 우리가 가진 것 중 가장 값진 것이다. 아껴 쓰자.",
+      "explanation": "- **economize**: 절약하다, 아껴 쓰다\n- 값진 것이니 아껴 쓰자는 말로 거짓말을 변명하는 풍자\n- 출처: Following the Equator, Chapter VII (1897), https://www.gutenberg.org/ebooks/2895"
+    }
+  ],
+  "retiredTurnIds": []
+}

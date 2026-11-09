@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "documentId": "be9dac04-4ac0-4b86-a14b-cccf5ce63a3e",
+  "revision": 0,
+  "source": {
+    "kind": "text",
+    "basename": "01 Money and Work"
+  },
+  "turns": [
+    {
+      "id": "fc9092da-7024-428c-825d-b805927d0bc9",
+      "speaker": "Benjamin Franklin",
+      "text": "Lost time is never found again; and what we call time enough, always proves little enough.",
+      "translation": "잃어버린 시간은 다시 찾을 수 없다. 그리고 우리가 \"시간은 충분하다\"고 하는 것은 언제나 부족한 것으로 드러난다.",
+      "explanation": "- **lost time**: 잃어버린 시간\n- **prove + 형용사**: ~인 것으로 드러나다\n- **time enough**: 충분한 시간 (고풍스러운 어순)\n- 출처: The Way to Wealth (1758), https://www.gutenberg.org/ebooks/43855"
+    },
+    {
+      "id": "e3c8c1fe-90bf-4eae-9e24-ee7fdbba1bdb",
+      "speaker": "Benjamin Franklin",
+      "text": "Dost thou love life? then do not squander time, for that is the stuff life is made of.",
+      "translation": "삶을 사랑하는가? 그렇다면 시간을 낭비하지 말라. 삶은 바로 그 시간으로 만들어져 있으니.",
+      "explanation": "- **squander**: 낭비하다, 흥청망청 쓰다\n- **the stuff ... is made of**: ~을 이루는 재료\n- **dost thou**: do you의 고어\n- 출처: The Way to Wealth (1758), https://www.gutenberg.org/ebooks/43855"
+    },
+    {
+      "id": "f4d1c9d9-5eda-4b6f-9251-a4aa4ab4058b",
+      "speaker": "Adam Smith",
+      "text": "It is not from the benevolence of the butcher, the brewer, or the baker that we expect our dinner, but from their regard to their own interest.",
+      "translation": "우리가 저녁을 기대하는 것은 정육점 주인, 양조업자, 빵집 주인의 자비심 때문이 아니라, 그들이 자기 이익을 돌보기 때문이다.",
+      "explanation": "- **benevolence**: 자비심, 선의\n- **regard to**: ~에 대한 고려, 배려\n- 경제학에서 가장 자주 인용되는 문장 중 하나\n- 출처: The Wealth of Nations, Book I Chapter II (1776), https://www.gutenberg.org/ebooks/3300"
+    },
+    {
+      "id": "61637ad5-fdea-4a73-92d4-4baa573f4431",
+      "speaker": "Walter Bagehot",
+      "text": "Money will not manage itself, and Lombard street has a great deal of money to manage.",
+      "translation": "돈은 스스로 관리되지 않는다. 그리고 롬바드 스트리트에는 관리해야 할 돈이 아주 많다.",
+      "explanation": "- **manage itself**: 저절로 관리되다\n- **Lombard street**: 런던 금융가(은행 거리)\n- **a great deal of**: 아주 많은 (불가산 명사와 함께)\n- 출처: Lombard Street, Chapter I (1873), https://www.gutenberg.org/ebooks/4359"
+    },
+    {
+      "id": "e7673abc-a98b-45c4-8abe-95c876ead753",
+      "speaker": "P. T. Barnum",
+      "text": "Money is in some respects like fire; it is a very excellent servant but a terrible master.",
+      "translation": "돈은 어떤 면에서 불과 같다. 아주 훌륭한 하인이지만 끔찍한 주인이다.",
+      "explanation": "- **in some respects**: 어떤 면에서는\n- **servant / master**: 하인 / 주인\n- 출처: The Art of Money Getting (1880), https://www.gutenberg.org/ebooks/8581"
+    },
+    {
+      "id": "68e9ad2e-79bf-4278-89d4-9c672bd13ac9",
+      "speaker": "P. T. Barnum",
+      "text": "Engage in one kind of business only, and stick to it faithfully until you succeed, or until your experience shows that you should abandon it.",
+      "translation": "한 가지 사업에만 뛰어들고, 성공할 때까지, 혹은 경험상 그만둬야 한다는 것이 분명해질 때까지 충실히 매달려라.",
+      "explanation": "- **engage in**: ~에 종사하다, 참여하다\n- **stick to**: ~을 고수하다, 계속하다\n- **abandon**: 포기하다, 버리다\n- 출처: The Art of Money Getting, \"Do Not Scatter Your Powers\" (1880), https://www.gutenberg.org/ebooks/8581"
+    },
+    {
+      "id": "b102a722-2ae9-4c01-b070-14cdb55ce2b0",
+      "speaker": "Mark Twain",
+      "text": "Put all your eggs in the one basket and—watch that basket.",
+      "translation": "달걀을 전부 한 바구니에 담아라. 그리고 그 바구니를 지켜보라.",
+      "explanation": "- **put all one's eggs in one basket**: 한곳에 모든 것을 걸다\n- 속담 \"Don't put all your eggs in one basket.\"을 뒤집은 말\n- 출처: Pudd'nhead Wilson, Chapter XV (1894), https://www.gutenberg.org/ebooks/102"
+    },
+    {
+      "id": "db0968e4-8e17-44d3-bb88-87fb38b53d5a",
+      "speaker": "Andrew Carnegie",
+      "text": "I believe the true road to preeminent success in any line is to make yourself master in that line.",
+      "translation": "어떤 분야에서든 탁월한 성공에 이르는 진짜 길은 그 분야의 대가가 되는 것이라고 나는 믿는다.",
+      "explanation": "- **preeminent**: 탁월한, 걸출한\n- **line**: (사업·일의) 분야, 업종\n- **make yourself master in**: ~에 통달하다\n- 출처: Autobiography of Andrew Carnegie, Chapter XIII (1920), https://www.gutenberg.org/ebooks/17976"
+    },
+    {
+      "id": "d374c961-a7c4-4807-94d1-2725c4a1e212",
+      "speaker": "Thorstein Veblen",
+      "text": "Conspicuous consumption of valuable goods is a means of reputability to the gentleman of leisure.",
+      "translation": "값비싼 재화의 과시적 소비는 유한계급 신사에게 체면을 세우는 수단이다.",
+      "explanation": "- **conspicuous consumption**: 과시적 소비 (베블런이 만든 용어)\n- **reputability**: 평판, 체면\n- **gentleman of leisure**: 유한계급 신사\n- 출처: The Theory of the Leisure Class, Chapter IV (1899), https://www.gutenberg.org/ebooks/833"
+    },
+    {
+      "id": "b8e8ea4f-d66a-43a0-bb20-b9cd3093b3fc",
+      "speaker": "John Maynard Keynes",
+      "text": "But this long run is a misleading guide to current affairs. In the long run we are all dead.",
+      "translation": "그러나 이 장기란 현재의 문제에는 오해를 부르는 길잡이다. 장기적으로 보면 우리는 모두 죽는다.",
+      "explanation": "- **in the long run**: 장기적으로\n- **misleading**: 오해를 일으키는\n- **current affairs**: 현재의 사안, 시사\n- 출처: A Tract on Monetary Reform, Chapter III (1923), https://www.gutenberg.org/ebooks/65278"
+    }
+  ],
+  "retiredTurnIds": []
+}
