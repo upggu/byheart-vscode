@@ -20,7 +20,7 @@ code --install-extension byheart-0.1.0.vsix
 
 1. Click **$(book) ByHeart** in the status bar (or run **ByHeart: Start Practice**).
 2. Pick a book, then a chapter. With only the built-in book present, the picker goes straight to its chapters.
-3. Type the sentence. The faint cue shows the first word and the first letter of the second; errors are underlined in red with the expected word beneath.
+3. Type the sentence. The faint cue shows the first word and the first letter of the second; errors are underlined in red with the expected word beneath. For a sentence you have not learned yet, turn on **Practice** in the header: the whole sentence shows as the faint cue and you type over it. The setting is remembered.
 4. **Enter** checks the answer (Shift+Enter inserts a newline). The original is shown with wrong letters underlined, case/punctuation differences dotted, and extra input struck through. **Enter** again goes to the next card.
 5. Buttons sit in the header, right of the Typing / Hint switch, and keep their place on every card (Alt+1 / Alt+2 / Alt+3): Previous, Mark as hard, Rewrite. Esc on the answer screen rewrites. **Hint** mode shows the cue only and reveals the sentence on Enter, no typing.
 6. After the last card you see a summary: cards, accuracy, average WPM. Then Next chapter, Restart, or Choose a chapter.
@@ -94,12 +94,12 @@ Text:
 ## WPM and accuracy
 
 - Live WPM = (characters typed / 5) ÷ minutes since your first keystroke on the card. It stops when you check. Because you are recalling, not copying, the number is lower than a typing-test WPM and is not comparable to tools like Warm Up.
-- The round summary shows the time-weighted average WPM over typed cards and the mean accuracy (strict: case and punctuation count).
+- The round summary shows the time-weighted average WPM over typed cards and the mean accuracy (strict: case and punctuation count). Cards checked with **Practice** on are left out of both and counted separately ("· 2 practice").
 - Set `byheart.showWpm` to `false` to hide WPM and record `null` instead. Accuracy is always recorded.
 
 ## Records
 
-`~/.byheart/records/<book>/<chapter file name>.json` holds the last position, per-card "hard" marks, and completed rounds (mode, start/end time, cards, total, accuracy, average WPM). Nothing per keystroke. Files are written atomically (temp file + rename) with a revision check, and a corrupt record file is never overwritten: you get an error banner and the session continues in memory.
+`~/.byheart/records/<book>/<chapter file name>.json` holds the last position, per-card "hard" marks, and completed rounds (mode, start/end time, cards, total, accuracy, average WPM, and `practiceCards` when some cards were typed with Practice on). Nothing per keystroke. Files are written atomically (temp file + rename) with a revision check, and a corrupt record file is never overwritten: you get an error banner and the session continues in memory.
 
 There is no scheduling, scoring, streaks, or dashboard, by design.
 
@@ -157,7 +157,7 @@ code --install-extension byheart-0.1.0.vsix
 
 1. 상태바의 **$(book) ByHeart**를 누르거나 **ByHeart: 연습 시작** 명령을 실행합니다.
 2. 교재 → 챕터를 고릅니다. 내장 교재만 있으면 바로 챕터 선택으로 갑니다.
-3. 문장을 타이핑합니다. 반투명 힌트는 첫 단어와 둘째 단어의 첫 글자까지 보여 주고, 틀린 글자는 빨간 밑줄과 함께 정답 단어가 아래에 작게 보입니다.
+3. 문장을 타이핑합니다. 반투명 힌트는 첫 단어와 둘째 단어의 첫 글자까지 보여 주고, 틀린 글자는 빨간 밑줄과 함께 정답 단어가 아래에 작게 보입니다. 아직 외우지 않은 문장은 헤더의 **연습**을 켜면 문장 전체가 반투명 힌트로 깔리고 그 위에 따라 칩니다. 켜고 끈 상태는 기억합니다.
 4. **Enter**로 정답을 확인합니다(Shift+Enter는 줄바꿈). 틀린 글자는 밑줄, 대소문자·구두점 차이는 점선, 불필요한 입력은 취소선으로 보입니다. 다시 **Enter**로 다음 카드.
 5. 버튼은 헤더의 타이핑 / 힌트 전환 오른쪽에 있고 카드가 바뀌어도 같은 자리에 있습니다(Alt+1 / Alt+2 / Alt+3): 이전, 미암기, 다시 쓰기. 확인 화면에서 Esc는 다시 쓰기. **힌트** 모드는 입력 없이 힌트만 보고 Enter로 원문을 엽니다.
 6. 마지막 카드 뒤 완료 요약(카드 수·정확도·평균 WPM)과 다음 챕터 / 처음부터 반복 / 챕터 선택 버튼이 나옵니다.
@@ -172,7 +172,7 @@ code --install-extension byheart-0.1.0.vsix
 ## WPM·정확도·기록
 
 - 실시간 WPM = (입력 글자 수 / 5) ÷ 첫 글자 입력 후 경과 분. 떠올리는 시간이 포함되므로 Warm Up 같은 타자 속도 측정과 다르고 더 낮게 나옵니다. `byheart.showWpm`을 끄면 재지도 기록하지도 않습니다.
-- 완료 요약의 평균 WPM은 타이핑한 카드의 시간 가중 평균, 정확도는 엄격 비교(대소문자·구두점 포함) 평균입니다.
+- 완료 요약의 평균 WPM은 타이핑한 카드의 시간 가중 평균, 정확도는 엄격 비교(대소문자·구두점 포함) 평균입니다. **연습**을 켜고 확인한 카드는 둘 다에서 빼고 따로 셉니다("· 연습 2"). 기록에는 `practiceCards`로 남습니다.
 - 기록은 `~/.byheart/records/<교재>/<챕터 파일명>.json`에 마지막 위치·미암기·완료한 바퀴만 남습니다. 임시 파일 + rename으로 원자적으로 쓰며, 손상된 기록 파일은 덮어쓰지 않고 오류 배너를 보여 준 뒤 메모리에서만 진행합니다. 자동 암기 판정·평점·복습 일정·개인 최고 기록·알림·대시보드는 의도적으로 없습니다.
 
 ## 개발

@@ -8,6 +8,7 @@ import type { Key, Locale } from './i18n';
 import { t } from './i18n';
 import { LiveTextarea } from './live-textarea';
 import type { Action, CardState, PracticeState } from './logic/reducer';
+import { roundSummary } from './logic/reducer';
 import { wpm } from './logic/wpm';
 
 type NavigateTarget = 'next' | 'restart' | 'pick';
@@ -22,6 +23,7 @@ export class PracticeView {
   private readonly title: HTMLSpanElement;
   private readonly position: HTMLSpanElement;
   private readonly translationToggle: HTMLButtonElement;
+  private readonly practiceToggle: HTMLButtonElement;
   private readonly modeTyping: HTMLButtonElement;
   private readonly modeHint: HTMLButtonElement;
   private readonly errorBanner: HTMLDivElement;
@@ -44,12 +46,14 @@ export class PracticeView {
     this.title = el('span', 'bh-title');
     this.position = el('span', 'bh-position');
     const toggles = el('div', 'bh-toggles');
-    this.translationToggle = button(t(locale, 'translation'), 'bh-toggle', () => this.actionHandler({ type: 'toggleTranslation' }));
+    this.translationToggle = button(t(locale, 'translation'), 'bh-toggle', () => this.toggle({ type: 'toggleTranslation' }));
+    this.practiceToggle = button(t(locale, 'practice'), 'bh-toggle', () => this.toggle({ type: 'togglePractice' }));
+    this.practiceToggle.title = t(locale, 'practiceTitle');
     const modeSwitch = el('div', 'bh-mode-switch');
     this.modeTyping = button(t(locale, 'modeTyping'), 'bh-toggle', () => this.actionHandler({ type: 'setMode', mode: 'typing' }));
     this.modeHint = button(t(locale, 'modeHint'), 'bh-toggle', () => this.actionHandler({ type: 'setMode', mode: 'hint' }));
     modeSwitch.append(this.modeTyping, this.modeHint);
-    toggles.append(this.translationToggle, modeSwitch);
+    toggles.append(this.translationToggle, this.practiceToggle, modeSwitch);
     // Actions live in the header so Reveal/Check/Next stay put no matter how
     // tall the card content is.
     this.actions = el('div', 'bh-actions');
@@ -76,6 +80,13 @@ export class PracticeView {
 
     root.addEventListener('keydown', (event) => this.onKeydown(event));
     this.timer = setInterval(() => this.updateWpm(), 500);
+  }
+
+  /** Header toggles hand focus back to the typing field so typing (and Space) keeps going there. */
+  private toggle(action: Action): void {
+    this.actionHandler(action);
+    const cs = this.state?.cards[this.state.index];
+    if (cs && !this.state?.finished && cs.stage === 'input' && cs.mode === 'typing') this.textarea.focus();
   }
 
   onAction(cb: (action: Action) => void): void {
@@ -110,6 +121,9 @@ export class PracticeView {
     const anyTranslation = chapter.cards.some((c) => c.translation);
     this.translationToggle.hidden = !anyTranslation;
     this.translationToggle.setAttribute('aria-pressed', String(prefs.showTranslation));
+    // Kept in the layout in hint mode so the header buttons do not shift.
+    this.practiceToggle.style.visibility = prefs.mode === 'typing' ? '' : 'hidden';
+    this.practiceToggle.setAttribute('aria-pressed', String(!!prefs.practice));
     this.modeTyping.setAttribute('aria-pressed', String(prefs.mode === 'typing'));
     this.modeHint.setAttribute('aria-pressed', String(prefs.mode === 'hint'));
 
@@ -188,7 +202,7 @@ export class PracticeView {
       );
     }
     this.textarea.setExpected(card.text);
-    this.textarea.setCue(recallCue(card.text));
+    this.textarea.setCue(this.state?.prefs.practice ? card.text : recallCue(card.text));
     this.textarea.setValue(cs.input);
     if (fullRender) this.textarea.focus();
   }
@@ -249,21 +263,18 @@ export class PracticeView {
   private renderFinished(fullRender: boolean): void {
     if (!fullRender || !this.state) return;
     const state = this.state;
-    const study = state.chapter.cards.map((c, i) => ({ c, cs: state.cards[i] })).filter(({ c }) => c.kind === 'study');
-    const checked = study.filter(({ cs }) => cs.checkedMode !== undefined);
-    const typing = checked.filter(({ cs }) => cs.checkedMode === 'typing');
-    const accuracies = typing.map(({ cs }) => cs.accuracy).filter((a): a is number => typeof a === 'number');
-    const accuracy = accuracies.length ? Math.round((accuracies.reduce((a, b) => a + b, 0) / accuracies.length) * 100) : null;
-    const timed = typing.filter(({ cs }) => cs.chars !== undefined);
-    const avg = state.settings.showWpm && timed.length
-      ? wpm(timed.reduce((a, { cs }) => a + (cs.chars ?? 0), 0), timed.reduce((a, { cs }) => a + cs.elapsedMs, 0))
-      : null;
+    // Same numbers as the round written to the record (practice cards excluded).
+    const round = roundSummary(state, '');
+    const cards = round?.cards ?? 0;
+    const accuracy = round?.accuracy == null ? null : Math.round(round.accuracy * 100);
+    const avg = round?.averageWpm ?? null;
     const summary = el('p', 'bh-summary');
-    summary.textContent = accuracy === null
-      ? t(this.locale, 'summaryHint', { cards: checked.length })
+    summary.textContent = (accuracy === null
+      ? t(this.locale, 'summaryHint', { cards })
       : avg === null
-        ? t(this.locale, 'summaryNoWpm', { cards: checked.length, accuracy })
-        : t(this.locale, 'summary', { cards: checked.length, accuracy, wpm: avg });
+        ? t(this.locale, 'summaryNoWpm', { cards, accuracy })
+        : t(this.locale, 'summary', { cards, accuracy, wpm: avg }))
+      + (round?.practiceCards ? t(this.locale, 'summaryPractice', { n: round.practiceCards }) : '');
     this.section.hidden = true;
     this.speaker.hidden = true;
     this.body.replaceChildren(summary);

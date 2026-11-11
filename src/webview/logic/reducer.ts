@@ -16,6 +16,8 @@ export interface CardState {
   checkedMode?: CardMode;
   accuracy?: number | null;
   chars?: number;
+  /** Checked in typing mode with the full-text cue shown. */
+  practice?: boolean;
 }
 
 export interface PracticeState {
@@ -39,6 +41,7 @@ export type Action =
   | { type: 'toggleMark' }
   | { type: 'setMode'; mode: CardMode }
   | { type: 'toggleTranslation' }
+  | { type: 'togglePractice' }
   | { type: 'restart'; nowIso: string }
   | { type: 'recordReplaced'; record: ChapterRecord }
   | { type: 'chapterReplaced'; chapter: PracticeChapter }
@@ -102,11 +105,13 @@ export function reduce(state: PracticeState, action: Action): Reduction {
       };
       if (timed) next.chars = cur.cs.input.length;
       else delete next.chars;
+      if (state.prefs.practice) next.practice = true;
+      else delete next.practice;
       return { state: withCard(state, state.index, next), ops: [] };
     }
     case 'reveal': {
       if (!cur || cur.card.kind !== 'study' || cur.cs.stage !== 'input') return none;
-      const { accuracy: _a, chars: _c, ...rest } = cur.cs;
+      const { accuracy: _a, chars: _c, practice: _p, ...rest } = cur.cs;
       return { state: withCard(state, state.index, { ...rest, stage: 'checked', checkedMode: 'hint', startedAt: null, elapsedMs: 0 }), ops: [] };
     }
     case 'next': {
@@ -142,6 +147,10 @@ export function reduce(state: PracticeState, action: Action): Reduction {
       const showTranslation = !state.prefs.showTranslation;
       return { state: { ...state, prefs: { ...state.prefs, showTranslation } }, ops: [], prefs: { showTranslation } };
     }
+    case 'togglePractice': {
+      const practice = !state.prefs.practice;
+      return { state: { ...state, prefs: { ...state.prefs, practice } }, ops: [], prefs: { practice } };
+    }
     case 'restart': {
       const first = state.chapter.cards[0];
       return {
@@ -175,16 +184,22 @@ export function roundSummary(state: PracticeState, finishedAt: string): RoundRec
   const modes = new Set(checked.map(({ cs }) => cs.checkedMode));
   const mode: RoundRecord['mode'] = modes.size === 0 ? state.prefs.mode : modes.size === 1 ? [...modes][0]! : 'mixed';
   const typing = checked.filter(({ cs }) => cs.checkedMode === 'typing');
-  const timed = typing.filter(({ cs }) => cs.chars !== undefined).map(({ cs }) => ({ chars: cs.chars!, elapsedMs: cs.elapsedMs }));
-  return {
+  // Practice cards were typed with the whole sentence visible; they say nothing
+  // about recall, so accuracy and WPM come from the other typing cards only.
+  const recall = typing.filter(({ cs }) => !cs.practice);
+  const practiceCards = typing.length - recall.length;
+  const timed = recall.filter(({ cs }) => cs.chars !== undefined).map(({ cs }) => ({ chars: cs.chars!, elapsedMs: cs.elapsedMs }));
+  const round: RoundRecord = {
     mode,
     startedAt: state.roundStartedAt,
     finishedAt,
     cards: checked.length,
     total: study.length,
-    accuracy: roundAccuracy(typing.map(({ cs }) => cs.accuracy ?? null)),
+    accuracy: roundAccuracy(recall.map(({ cs }) => cs.accuracy ?? null)),
     averageWpm: state.settings.showWpm ? averageWpm(timed) : null,
   };
+  if (practiceCards) round.practiceCards = practiceCards;
+  return round;
 }
 
 const STATE_VERSION = 1;

@@ -98,7 +98,7 @@ function onHostMessage(message: HostMessage): void {
         state = reduce(state, { type: 'recordReplaced', record: message.record }).state;
       } else {
         // No local state (e.g. restored state was unusable): start fresh with defaults.
-        const prefs = state?.prefs ?? { mode: 'typing' as const, showTranslation: false };
+        const prefs = state?.prefs ?? { mode: 'typing' as const, showTranslation: false, practice: false };
         const settings = state?.settings ?? { showWpm: true };
         state = initialState(message.chapter, message.record, prefs, settings, new Date().toISOString());
       }

@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext): void {
   const builtin = builtinBooks(context.extensionPath);
   const config = () => vscode.workspace.getConfiguration('byheart');
   const settings = (): Settings => ({ showWpm: config().get<boolean>('showWpm', true) });
-  const preferences = (): Preferences => ({ mode: 'typing', showTranslation: false, ...context.globalState.get<Partial<Preferences>>(PREFS_KEY, {}) });
+  const preferences = (): Preferences => ({ mode: 'typing', showTranslation: false, practice: false, ...context.globalState.get<Partial<Preferences>>(PREFS_KEY, {}) });
   const locale = vscode.env.language.toLowerCase().startsWith('ko') ? 'ko' : 'en';
 
   let root = resolveRoot(config().get<string>('folder', ''), os.homedir());

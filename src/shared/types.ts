@@ -41,8 +41,11 @@ export interface RoundRecord {
   cards: number;
   /** Study cards in the chapter. */
   total: number;
+  /** Recall typing only: practice cards are excluded. */
   accuracy: number | null;
   averageWpm: number | null;
+  /** Typing cards checked with the full text shown (practice). Omitted when 0. */
+  practiceCards?: number;
 }
 
 export interface ChapterRecord {
@@ -68,6 +71,8 @@ export interface Settings {
 export interface Preferences {
   mode: 'typing' | 'hint';
   showTranslation: boolean;
+  /** Typing mode shows the whole sentence as the cue (extension only, off by default). */
+  practice: boolean;
 }
 
 export interface Navigation {

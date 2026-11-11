@@ -40,7 +40,7 @@ beforeEach(async () => {
   await fs.writeFile(join(dir, '2.txt'), 'two');
   await fs.writeFile(join(dir, '3.txt'), '');
   posted = []; watchers = []; opened = []; picked = undefined;
-  prefs = { mode: 'typing', showTranslation: false };
+  prefs = { mode: 'typing', showTranslation: false, practice: false };
   session = new PracticeSession(deps());
 });
 afterEach(async () => { session.dispose(); await fs.rm(root, { recursive: true, force: true }); });

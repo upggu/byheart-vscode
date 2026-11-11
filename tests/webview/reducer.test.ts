@@ -12,7 +12,7 @@ const chapter: PracticeChapter = {
   ],
 };
 const record: ChapterRecord = emptyRecord(chapter.ref);
-const prefs: Preferences = { mode: 'typing', showTranslation: false };
+const prefs: Preferences = { mode: 'typing', showTranslation: false, practice: false };
 const settings: Settings = { showWpm: true };
 const T0 = '2026-11-09T10:00:00.000Z';
 const T1 = '2026-11-09T10:05:00.000Z';
@@ -132,6 +132,41 @@ describe('reduce', () => {
     expect(r.ops).toEqual([]);
   });
 
+  describe('practice (보고 따라 치기)', () => {
+    const practicing = () => start({ prefs: { ...prefs, practice: true } });
+
+    it('togglePractice는 prefs를 내고 입력을 지우지 않는다', () => {
+      const s = run(start(), { type: 'input', value: 'Hel', now: 1000 }).state;
+      const r = reduce(s, { type: 'togglePractice' });
+      expect(r.prefs).toEqual({ practice: true });
+      expect(r.state.prefs.practice).toBe(true);
+      expect(r.state.cards[0]).toMatchObject({ stage: 'input', input: 'Hel', startedAt: 1000 });
+      expect(r.ops).toEqual([]);
+    });
+
+    it('연습 중 check한 카드는 practice로 표시되고 reset하면 지워진다', () => {
+      const s = run(practicing(), { type: 'input', value: 'Hello world.', now: 1000 }, { type: 'check', now: 2000 }).state;
+      expect(s.cards[0]).toMatchObject({ stage: 'checked', checkedMode: 'typing', practice: true, accuracy: 1 });
+      expect(run(s, { type: 'reset' }).state.cards[0].practice).toBeUndefined();
+      const off = run(start(), { type: 'input', value: 'Hello world.', now: 1000 }, { type: 'check', now: 2000 }).state;
+      expect(off.cards[0].practice).toBeUndefined();
+    });
+
+    it('roundSummary: 정확도·WPM은 외워 친 카드만, 연습 카드는 practiceCards로 센다', () => {
+      let s = typeCheckNext(practicing(), 'Hello wor', 60000).state; // practice, inaccurate
+      s = run(s, { type: 'next' }, { type: 'togglePractice' }).state;
+      s = typeCheckNext(s, 'Good night.', 30000).state;
+      expect(roundSummary(s, T1)).toMatchObject({ mode: 'typing', cards: 2, total: 2, practiceCards: 1, accuracy: 1, averageWpm: 4 });
+    });
+
+    it('roundSummary: 모두 연습이면 accuracy·averageWpm null', () => {
+      let s = typeCheckNext(practicing(), 'Hello world.', 60000).state;
+      s = run(s, { type: 'next' }).state;
+      s = typeCheckNext(s, 'Good night.', 30000).state;
+      expect(roundSummary(s, T1)).toMatchObject({ mode: 'typing', cards: 2, practiceCards: 2, accuracy: null, averageWpm: null });
+    });
+  });
+
   it('toggleTranslation은 prefs를 낸다', () => {
     const r = reduce(start(), { type: 'toggleTranslation' });
     expect(r.prefs).toEqual({ showTranslation: true });
@@ -206,7 +241,7 @@ describe('reduce', () => {
   });
 
   describe('hint mode (Task 9)', () => {
-    const hintPrefs: Preferences = { mode: 'hint', showTranslation: false };
+    const hintPrefs: Preferences = { mode: 'hint', showTranslation: false, practice: false };
     it('reveal은 checked로 바꾸고 accuracy 없이 checkedMode hint', () => {
       const r = reduce(start({ prefs: hintPrefs }), { type: 'reveal' });
       expect(r.state.cards[0]).toMatchObject({ stage: 'checked', checkedMode: 'hint' });
