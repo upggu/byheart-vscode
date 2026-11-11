@@ -28,6 +28,23 @@ export function booksDir(root: string): string {
   return join(root, 'books');
 }
 
+/** Guide written into books/ by the Edit Books command. `.md`, so never read as a chapter. */
+export const GUIDE_NAME = 'BYHEART-GUIDE.md';
+
+/**
+ * The one file the extension writes into the user's books folder: created only
+ * when missing (exclusive create), never overwritten. Returns whether it wrote.
+ */
+export async function writeGuideIfMissing(root: string, content: string): Promise<boolean> {
+  try {
+    await fs.writeFile(join(booksDir(root), GUIDE_NAME), content, { flag: 'wx' });
+    return true;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'EEXIST') return false;
+    throw error;
+  }
+}
+
 /** Creates books/ and records/ when missing. Never writes a file. */
 export async function ensureLayout(root: string): Promise<void> {
   await fs.mkdir(booksDir(root), { recursive: true });

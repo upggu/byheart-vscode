@@ -12,7 +12,6 @@ let posted: HostMessage[];
 let prefs: Preferences;
 let watchers: { chapterId: string; onChange: () => void; disposed: boolean }[];
 let picked: { bookId: string; chapterId: string } | undefined;
-let opened: string[];
 let session: PracticeSession;
 
 function deps(): SessionDeps {
@@ -27,7 +26,6 @@ function deps(): SessionDeps {
     locale: 'ko',
     pick: async () => picked,
     watch: (_dir, chapterId, onChange) => { const w = { chapterId, onChange, disposed: false }; watchers.push(w); return { dispose: () => { w.disposed = true; } }; },
-    openFolder: async (dir) => { opened.push(dir); },
     notify: () => undefined,
   };
 }
@@ -39,7 +37,7 @@ beforeEach(async () => {
   await fs.writeFile(join(dir, '1.txt'), 'one');
   await fs.writeFile(join(dir, '2.txt'), 'two');
   await fs.writeFile(join(dir, '3.txt'), '');
-  posted = []; watchers = []; opened = []; picked = undefined;
+  posted = []; watchers = []; picked = undefined;
   prefs = { mode: 'typing', showTranslation: false, practice: false };
   session = new PracticeSession(deps());
 });
@@ -141,15 +139,13 @@ describe('PracticeSession', () => {
     expect(posted).toHaveLength(1);
   });
 
-  it('navigate pick은 pick 결과를 열고, preferences·openFolder를 처리한다', async () => {
+  it('navigate pick은 pick 결과를 열고, preferences를 처리한다', async () => {
     await session.open({ bookId: 'alpha', chapterId: '1.txt' });
     picked = { bookId: 'alpha', chapterId: '2.txt' };
     await session.handle({ type: 'navigate', to: 'pick' });
     expect(posted.at(-1)).toMatchObject({ type: 'chapter', chapter: { title: '2' } });
     await session.handle({ type: 'preferences', preferences: { mode: 'hint' } });
     expect(prefs.mode).toBe('hint');
-    await session.handle({ type: 'openFolder' });
-    expect(opened).toEqual([join(root, 'books')]);
     await session.handle({ type: 'navigate', to: 'restart' });
   });
 

@@ -1,10 +1,12 @@
+import { promises as fs } from 'node:fs';
 import * as os from 'node:os';
+import { join } from 'node:path';
 import * as vscode from 'vscode';
 import type { Preferences, Settings } from '../shared/types';
 import { builtinBooks } from './builtin';
-import { ensureLayout } from './library';
+import { booksDir, ensureLayout, writeGuideIfMissing } from './library';
 import { PracticePanel, VIEW_TYPE, type PanelDeps } from './panel';
-import { openBooksFolder, pickChapter } from './picker';
+import { pickChapter } from './picker';
 import { RecordStore } from './records';
 import { resolveRoot } from './settings';
 
@@ -22,6 +24,19 @@ export function activate(context: vscode.ExtensionContext): void {
   const layoutReady = () => ensureLayout(root).catch((error) => void vscode.window.showErrorMessage(`ByHeart: ${error instanceof Error ? error.message : String(error)}`));
   void layoutReady();
 
+  // Writes the guide only if it is missing, then opens books/ in a new window
+  // so the user can add chapter files with the editor.
+  const editBooks = async (): Promise<void> => {
+    await layoutReady();
+    try {
+      const guide = await fs.readFile(join(context.extensionPath, 'media', `guide.${locale}.md`), 'utf8');
+      await writeGuideIfMissing(root, guide);
+    } catch (error) {
+      void vscode.window.showErrorMessage(`ByHeart: ${error instanceof Error ? error.message : String(error)}`);
+    }
+    await vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(booksDir(root)), { forceNewWindow: true });
+  };
+
   const deps = (): PanelDeps => ({
     root,
     store,
@@ -31,24 +46,20 @@ export function activate(context: vscode.ExtensionContext): void {
     setPreferences: (p) => context.globalState.update(PREFS_KEY, { ...preferences(), ...p }),
     locale,
     pick: async () => {
-      const picked = await pickChapter(root, builtin);
+      const picked = await pickChapter(root, builtin, editBooks);
       return picked?.chapter.ref;
     },
-    openFolder: async () => openBooksFolder(root),
     notify: (message) => void vscode.window.showErrorMessage(message),
   });
 
   context.subscriptions.push(
     vscode.commands.registerCommand('byheart.start', async () => {
       await layoutReady();
-      const picked = await pickChapter(root, builtin);
+      const picked = await pickChapter(root, builtin, editBooks);
       if (!picked) return;
       PracticePanel.show(context, deps()).open(picked.chapter.ref);
     }),
-    vscode.commands.registerCommand('byheart.openFolder', async () => {
-      await layoutReady();
-      await openBooksFolder(root);
-    }),
+    vscode.commands.registerCommand('byheart.editBooks', editBooks),
     vscode.window.registerWebviewPanelSerializer(VIEW_TYPE, {
       async deserializeWebviewPanel(panel: vscode.WebviewPanel) {
         PracticePanel.revive(panel, context, deps());

@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { builtinBooks } from '../src/extension/builtin';
-import { compareNames, ensureLayout, listBooks, listChapters, neighbors, readChapter, type BookEntry, type ChapterEntry } from '../src/extension/library';
+import { compareNames, ensureLayout, GUIDE_NAME, listBooks, listChapters, neighbors, readChapter, writeGuideIfMissing, type BookEntry, type ChapterEntry } from '../src/extension/library';
 import { resolveRoot } from '../src/extension/settings';
 
 let root: string;
@@ -101,5 +101,17 @@ describe('library', () => {
     expect(entries.map((e) => e.name).sort()).toEqual(['books', 'records']);
     expect(entries.every((e) => e.isDirectory())).toBe(true);
     expect(await fs.readdir(join(fresh, 'books'))).toEqual([]);
+  });
+
+  it('writeGuideIfMissing은 books/에 안내 파일을 만들고, 있으면 덮어쓰지 않는다', async () => {
+    const fresh = join(root, 'guide');
+    await ensureLayout(fresh);
+    const path = join(fresh, 'books', GUIDE_NAME);
+    expect(await writeGuideIfMissing(fresh, '# v1\n')).toBe(true);
+    expect(await fs.readFile(path, 'utf8')).toBe('# v1\n');
+    await fs.writeFile(path, 'my notes');
+    expect(await writeGuideIfMissing(fresh, '# v2\n')).toBe(false);
+    expect(await fs.readFile(path, 'utf8')).toBe('my notes');
+    expect(await listBooks(fresh, [])).toEqual([]);
   });
 });

@@ -4,7 +4,7 @@
 
 First local-only version, installed from a `.vsix`.
 
-- Commands **ByHeart: Start Practice** / **ByHeart: Open Books Folder**; QuickPick book → chapter.
+- Commands **ByHeart: Start Practice** / **ByHeart: Edit Books**; QuickPick book → chapter. Edit Books opens the books folder in a new window and writes `BYHEART-GUIDE.md` there only if it is missing.
 - Books from `~/.byheart/books/<book>/`: `.byheart.json` (web app review schema, validated with the copied `parseReviewDocument`) and `.txt` (blank-line paragraphs, `# Title`).
 - Typing practice webview: recall cue overlay, live error highlighting with word hints, strict answer comparison, translation toggle, explanation notes, section labels, IME-aware Enter handling.
 - Hint-card mode (cue only, reveal on Enter).

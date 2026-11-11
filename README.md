@@ -25,7 +25,7 @@ code --install-extension byheart-0.1.0.vsix
 5. Buttons sit in the header, right of the Typing / Hint switch, and keep their place on every card (Alt+1 / Alt+2 / Alt+3): Previous, Mark as hard, Rewrite. Esc on the answer screen rewrites. **Hint** mode shows the cue only and reveals the sentence on Enter, no typing.
 6. After the last card you see a summary: cards, accuracy, average WPM. Then Next chapter, Restart, or Choose a chapter.
 
-**ByHeart: Open Books Folder** opens `~/.byheart/books` in your file manager.
+**ByHeart: Edit Books** opens `~/.byheart/books` in a new VS Code window, with a short guide (`BYHEART-GUIDE.md`) for adding books. The same item is at the bottom of the picker.
 
 ## Books folder
 
@@ -40,7 +40,7 @@ code --install-extension byheart-0.1.0.vsix
 
 To add your own book:
 
-1. Create a folder under `~/.byheart/books/`, e.g. `English Quotes`.
+1. Run **ByHeart: Edit Books**. It opens `~/.byheart/books/` in a new window, with `BYHEART-GUIDE.md` in it. Create a book folder there, e.g. `English Quotes`.
 2. Put one or more `.txt` or `.byheart.json` files in it (formats below). Start file names with numbers (`01`, `02`) to control the order.
 3. Run **ByHeart: Start Practice** and pick the book, then the chapter. The folder is read each time you open the picker.
 
@@ -49,7 +49,7 @@ What is read:
 - Only folders directly under `books/` are books. Folders starting with `.` are skipped, and files placed directly in `books/` are ignored.
 - Only `.txt` and `.byheart.json` files directly in a book folder are chapters. Other files (notes, `.md`, images), files starting with `.`, and subfolders inside a book are ignored, so you can keep notes next to your chapters.
 - Chapters are sorted by file name with numbers compared as numbers (`1, 2, 10`).
-- Change the root with the `byheart.folder` setting (empty = `~/.byheart`; `~/x` and relative paths resolve from your home directory). The extension creates `books/` and `records/` on first run and never deletes or overwrites your files.
+- Change the root with the `byheart.folder` setting (empty = `~/.byheart`; `~/x` and relative paths resolve from your home directory). The extension creates `books/` and `records/` on first run and never deletes or overwrites your files. The only file it puts in `books/` is `BYHEART-GUIDE.md`, written by **Edit Books** only when it is missing; delete it to get the latest version next time.
 - A chapter that fails to parse stays in the list with a warning and the first line of the error.
 
 ### `.txt` chapters
@@ -195,7 +195,7 @@ code --install-extension byheart-0.1.0.vsix
 
 내 교재 추가하기:
 
-1. `~/.byheart/books/` 아래에 교재 폴더를 만듭니다(예: `영어 명언`).
+1. **ByHeart: 교재 편집**을 실행합니다. `~/.byheart/books/`가 새 VS Code 창으로 열리고 안내 파일 `BYHEART-GUIDE.md`가 들어 있습니다. 거기에 교재 폴더를 만듭니다(예: `영어 명언`). 교재 목록 맨 아래의 **교재 편집** 항목도 같은 동작입니다.
 2. 그 안에 `.txt`나 `.byheart.json` 파일을 하나 이상 넣습니다(형식은 아래). 순서를 정하려면 파일 이름 앞에 `01`, `02`처럼 번호를 붙입니다.
 3. **ByHeart: 연습 시작**을 실행해 교재 → 챕터를 고릅니다. 목록을 열 때마다 폴더를 다시 읽습니다.
 
@@ -204,7 +204,7 @@ code --install-extension byheart-0.1.0.vsix
 - `books/` 바로 아래 폴더만 교재입니다. `.`으로 시작하는 폴더는 건너뛰고, `books/` 바로 밑에 둔 파일은 무시합니다.
 - 교재 폴더 바로 안의 `.txt`·`.byheart.json`만 챕터입니다. 다른 파일(메모, `.md`, 이미지), `.`으로 시작하는 파일, 교재 안의 하위 폴더는 무시하므로 메모를 챕터 옆에 같이 둬도 됩니다.
 - 파일 이름의 숫자는 숫자로 비교해 정렬합니다(`1, 2, 10`).
-- 위치는 `byheart.folder` 설정으로 바꿀 수 있고(비우면 `~/.byheart`), 확장은 `books/`·`records/` 폴더를 만들 뿐 사용자 파일을 지우거나 덮어쓰지 않습니다. 읽지 못한 챕터는 목록에 경고와 오류 첫 줄을 붙여 보여 줍니다.
+- 위치는 `byheart.folder` 설정으로 바꿀 수 있고(비우면 `~/.byheart`), 확장은 `books/`·`records/` 폴더를 만들 뿐 사용자 파일을 지우거나 덮어쓰지 않습니다. `books/`에 넣는 파일은 **교재 편집**이 없을 때만 만드는 `BYHEART-GUIDE.md` 하나뿐이며, 지우면 다음 실행 때 최신 안내로 다시 만듭니다. 읽지 못한 챕터는 목록에 경고와 오류 첫 줄을 붙여 보여 줍니다.
 
 형식:
 

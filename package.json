@@ -40,8 +40,8 @@
         "title": "%command.start%"
       },
       {
-        "command": "byheart.openFolder",
-        "title": "%command.openFolder%"
+        "command": "byheart.editBooks",
+        "title": "%command.editBooks%"
       }
     ],
     "configuration": {

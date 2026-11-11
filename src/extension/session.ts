@@ -4,7 +4,7 @@
 import { resolve } from 'node:path';
 import type { HostMessage, Locale, WebviewMessage } from '../shared/protocol';
 import type { ChapterRef, Preferences, Settings } from '../shared/types';
-import { booksDir, listBooks, listChapters, neighbors, readChapter, type BookEntry, type ChapterEntry } from './library';
+import { listBooks, listChapters, neighbors, readChapter, type BookEntry, type ChapterEntry } from './library';
 import { emptyRecord, RecordCorruptError, type RecordStore } from './records';
 
 export interface Disposable {
@@ -24,7 +24,6 @@ export interface SessionDeps {
   pick: () => Promise<{ bookId: string; chapterId: string } | undefined>;
   /** Watches one file; `onChange` fires on change/create/delete. */
   watch: (dir: string, chapterId: string, onChange: () => void) => Disposable;
-  openFolder: (dir: string) => Thenable<void>;
   /** Non-blocking user notification (showErrorMessage). */
   notify: (message: string) => void;
 }
@@ -152,9 +151,6 @@ export class PracticeSession {
       }
       case 'preferences':
         await this.deps.setPreferences(message.preferences);
-        return;
-      case 'openFolder':
-        await this.deps.openFolder(booksDir(this.deps.root));
         return;
     }
   }

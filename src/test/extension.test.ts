@@ -11,6 +11,6 @@ suite('ByHeart extension', () => {
     await ext.activate();
     const cmds = await vscode.commands.getCommands(true);
     assert.ok(cmds.includes('byheart.start'));
-    assert.ok(cmds.includes('byheart.openFolder'));
+    assert.ok(cmds.includes('byheart.editBooks'));
   });
 });

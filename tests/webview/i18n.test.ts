@@ -9,7 +9,7 @@ describe('i18n', () => {
     expect(t('ko', 'summary', { cards: 10, accuracy: 92, wpm: 31 })).toBe('한 바퀴 완료 — 카드 10 · 정확도 92% · 평균 31 WPM');
   });
   it('필수 키가 모두 있다', () => {
-    const keys = ['check', 'next', 'previous', 'mark', 'marked', 'rewrite', 'rehide', 'reveal', 'translation', 'modeTyping', 'modeHint', 'position', 'wpm', 'summary', 'summaryNoWpm', 'nextChapter', 'restart', 'pickChapter', 'limited', 'extraInput', 'error', 'openFolder'];
+    const keys = ['check', 'next', 'previous', 'mark', 'marked', 'rewrite', 'rehide', 'reveal', 'translation', 'modeTyping', 'modeHint', 'position', 'wpm', 'summary', 'summaryNoWpm', 'nextChapter', 'restart', 'pickChapter', 'limited', 'extraInput', 'error'];
     for (const key of keys) expect(table.en).toHaveProperty(key);
   });
   it('빈 문자열은 그대로 두고 없는 변수는 비운다', () => {

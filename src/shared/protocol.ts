@@ -23,5 +23,4 @@ export type WebviewMessage =
   | { type: 'ready'; chapterRef?: ChapterRef }
   | { type: 'apply'; ops: RecordOp[] }
   | { type: 'navigate'; to: 'next' | 'restart' | 'pick' }
-  | { type: 'preferences'; preferences: Partial<Preferences> }
-  | { type: 'openFolder' };
+  | { type: 'preferences'; preferences: Partial<Preferences> };
