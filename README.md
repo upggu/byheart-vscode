@@ -31,17 +31,30 @@ code --install-extension byheart-0.1.0.vsix
 
 ```
 ~/.byheart/
-  books/<book>/<chapter>.byheart.json | <chapter>.txt
-  records/<book>/<chapter file name>.json
+  books/
+    English Quotes/             ← a book (the folder name is the book name)
+      01 Day 1.txt              ← a chapter (the file name without extension is the chapter name)
+      02 Day 2.byheart.json     ← another chapter; formats can be mixed in one book
+  records/<book>/<chapter file name>.json   ← written by the extension
 ```
 
-- One folder under `books/` is one book; one file is one chapter. Subfolders and folders starting with `.` are ignored. Chapters are sorted numerically (`1, 2, 10`).
+To add your own book:
+
+1. Create a folder under `~/.byheart/books/`, e.g. `English Quotes`.
+2. Put one or more `.txt` or `.byheart.json` files in it (formats below). Start file names with numbers (`01`, `02`) to control the order.
+3. Click **ByHeart** in the status bar and pick the book, then the chapter. The folder is read each time you open the picker.
+
+What is read:
+
+- Only folders directly under `books/` are books. Folders starting with `.` are skipped, and files placed directly in `books/` are ignored.
+- Only `.txt` and `.byheart.json` files directly in a book folder are chapters. Other files (notes, `.md`, images), files starting with `.`, and subfolders inside a book are ignored, so you can keep notes next to your chapters.
+- Chapters are sorted by file name with numbers compared as numbers (`1, 2, 10`).
 - Change the root with the `byheart.folder` setting (empty = `~/.byheart`; `~/x` and relative paths resolve from your home directory). The extension creates `books/` and `records/` on first run and never deletes or overwrites your files.
 - A chapter that fails to parse stays in the list with a warning and the first line of the error.
 
 ### `.txt` chapters
 
-Plain UTF-8 text. Paragraphs separated by one or more blank lines become cards. Line breaks inside a paragraph are kept and must be typed. If the first non-empty line starts with `# `, it is the chapter title shown in the picker. Markdown emphasis is not interpreted.
+Plain UTF-8 text. Paragraphs separated by one or more blank lines become cards. Line breaks inside a paragraph are kept and must be typed. If the first non-empty line starts with `# `, it is not a card; its text is shown next to the chapter name in the picker (the chapter name itself stays the file name). Markdown emphasis is not interpreted.
 
 Card identity is a hash of the paragraph text, so **editing a paragraph resets that card's "hard" mark** (position and round history of other cards are unaffected). Use `.byheart.json` if you want stable IDs with translations and notes.
 
@@ -171,9 +184,31 @@ code --install-extension byheart-0.1.0.vsix
 
 ## 교재 폴더
 
-`~/.byheart/books/<교재>/<챕터>.byheart.json` 또는 `.txt`. 폴더 하나 = 교재, 파일 하나 = 챕터. 하위 폴더와 `.`으로 시작하는 폴더는 무시하고 숫자순으로 정렬합니다. 위치는 `byheart.folder` 설정으로 바꿀 수 있고(비우면 `~/.byheart`), 확장은 `books/`·`records/` 폴더를 만들 뿐 사용자 파일을 지우거나 덮어쓰지 않습니다.
+```
+~/.byheart/
+  books/
+    영어 명언/                  ← 교재 (폴더 이름이 교재 이름)
+      01 Day 1.txt              ← 챕터 (확장자를 뺀 파일 이름이 챕터 이름)
+      02 Day 2.byheart.json     ← 챕터. 한 교재 안에 두 형식을 섞어도 됩니다
+  records/<교재>/<챕터 파일명>.json   ← 확장이 쓰는 기록
+```
 
-- **`.txt`**: 빈 줄로 나눈 단락 하나가 카드 하나. 단락 안 줄바꿈은 유지되어 그대로 쳐야 합니다. 첫 줄이 `# `로 시작하면 챕터 제목(선택 목록에 표시). 카드 ID는 본문 해시이므로 **단락을 고치면 그 카드의 미암기 표시가 끊깁니다.**
+내 교재 추가하기:
+
+1. `~/.byheart/books/` 아래에 교재 폴더를 만듭니다(예: `영어 명언`).
+2. 그 안에 `.txt`나 `.byheart.json` 파일을 하나 이상 넣습니다(형식은 아래). 순서를 정하려면 파일 이름 앞에 `01`, `02`처럼 번호를 붙입니다.
+3. 상태바의 **ByHeart**를 눌러 교재 → 챕터를 고릅니다. 목록을 열 때마다 폴더를 다시 읽습니다.
+
+읽는 규칙:
+
+- `books/` 바로 아래 폴더만 교재입니다. `.`으로 시작하는 폴더는 건너뛰고, `books/` 바로 밑에 둔 파일은 무시합니다.
+- 교재 폴더 바로 안의 `.txt`·`.byheart.json`만 챕터입니다. 다른 파일(메모, `.md`, 이미지), `.`으로 시작하는 파일, 교재 안의 하위 폴더는 무시하므로 메모를 챕터 옆에 같이 둬도 됩니다.
+- 파일 이름의 숫자는 숫자로 비교해 정렬합니다(`1, 2, 10`).
+- 위치는 `byheart.folder` 설정으로 바꿀 수 있고(비우면 `~/.byheart`), 확장은 `books/`·`records/` 폴더를 만들 뿐 사용자 파일을 지우거나 덮어쓰지 않습니다. 읽지 못한 챕터는 목록에 경고와 오류 첫 줄을 붙여 보여 줍니다.
+
+형식:
+
+- **`.txt`**: 빈 줄로 나눈 단락 하나가 카드 하나. 단락 안 줄바꿈은 유지되어 그대로 쳐야 합니다. 첫 줄이 `# `로 시작하면 카드가 아니라, 선택 목록에서 챕터 이름 옆에 붙는 설명이 됩니다(챕터 이름은 그대로 파일 이름). 카드 ID는 본문 해시이므로 **단락을 고치면 그 카드의 미암기 표시가 끊깁니다.**
 - **`.byheart.json`**: 웹앱 검수 스키마 그대로(위 영문 예시). `translation`은 해석 토글, `explanation`은 정답 확인 뒤 해설, `kind: "explanation"`은 입력 없이 보여 주는 카드, `section`은 값이 바뀔 때 라벨로 표시됩니다. 위 영문 절의 **AI 요청문**을 복사해 쓰면 텍스트를 이 형식으로 바꿀 수 있습니다.
 
 ## WPM·정확도·기록
