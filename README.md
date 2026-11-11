@@ -119,6 +119,13 @@ Runs only on your machine: `extensionKind: ["ui"]`, no network requests, no tele
 | `npm run dev:webview` | Builds and serves the webview harness at http://127.0.0.1:5179/dev/harness.html |
 | `npm run package` | typecheck + build + `vsce package` |
 
+### Try it in VS Code
+
+- **F5:** open this folder in VS Code and press F5 (**Run ByHeart (Extension Development Host)** in `.vscode/launch.json`). It runs `npm run build` and opens a second window with the extension loaded from `dist/`, without installing it. Same from a terminal: `npm run build && code --extensionDevelopmentPath="$PWD"`.
+- **After a change:** keep `npm run watch` running, then run **Developer: Reload Window** in the development window. **Developer: Open Webview Developer Tools** shows webview errors.
+- **As installed:** `npm run package && code --install-extension byheart-0.1.0.vsix --force`, then reload the window. Remove with `code --uninstall-extension byheart-placeholder.byheart`.
+- **Keep your real records clean:** both ways use `~/.byheart`. Set `byheart.folder` to a scratch folder (e.g. `/tmp/byheart-test`); the built-in book still shows. The development window shares your user settings, so clear the setting when you are done.
+
 Targets `engines.vscode ^1.144.0` with `@types/vscode ~1.144.0`. Comparison logic (`src/core/lib/*`, `src/core/review/model.ts`) is copied from the ByHeart web app at commit `0ee9eaa`; each file's first line records the source and it must not be edited here.
 
 ## License
@@ -177,7 +184,14 @@ code --install-extension byheart-0.1.0.vsix
 
 ## 개발
 
-명령은 위 영문 표와 `package.json`을 따릅니다. 이 PC에는 VS Code 앱이 없지만 `npm run test:integration`은 `.vscode-test/`에 VS Code를 내려받아 실행됩니다. 웹뷰 UI는 `npm run dev:webview` 하네스를 브라우저로 확인합니다. 비교 로직은 웹앱 커밋 `0ee9eaa`의 복사본이며 `npm run core:check`로 동일성을 확인합니다.
+명령은 위 영문 표와 `package.json`을 따릅니다. `npm run test:integration`은 `.vscode-test/`에 VS Code를 내려받아 자동 테스트를 실행합니다. 웹뷰 UI만 빠르게 볼 때는 `npm run dev:webview` 하네스를 브라우저로 엽니다.
+
+VS Code에서 직접 확인하기:
+
+- **F5:** 이 폴더를 VS Code로 열고 F5(`.vscode/launch.json`의 **Run ByHeart (Extension Development Host)**). `npm run build` 뒤 확장을 설치하지 않고 `dist/`에서 불러온 새 창이 열립니다. 터미널에서는 `npm run build && code --extensionDevelopmentPath="$PWD"`.
+- **고친 뒤:** `npm run watch`를 켜 두고 개발용 창에서 **Developer: Reload Window**. 웹뷰 오류는 **Developer: Open Webview Developer Tools**에서 봅니다.
+- **설치한 상태로:** `npm run package && code --install-extension byheart-0.1.0.vsix --force` 뒤 창을 다시 불러옵니다. 제거는 `code --uninstall-extension byheart-placeholder.byheart`.
+- **실제 기록 보호:** 두 방법 모두 `~/.byheart`를 씁니다. 설정에서 `byheart.folder`를 임시 폴더(예: `/tmp/byheart-test`)로 바꾸면 실제 기록이 바뀌지 않고, 내장 교재는 그대로 보입니다. 개발용 창은 평소 VS Code와 사용자 설정을 공유하므로 끝나면 이 설정을 비워 두세요. 비교 로직은 웹앱 커밋 `0ee9eaa`의 복사본이며 `npm run core:check`로 동일성을 확인합니다.
 
 ## 라이선스
 
