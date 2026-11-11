@@ -22,7 +22,7 @@ code --install-extension byheart-0.1.0.vsix
 2. Pick a book, then a chapter. With only the built-in book present, the picker goes straight to its chapters.
 3. Type the sentence. The faint cue shows the first word and the first letter of the second; errors are underlined in red with the expected word beneath.
 4. **Enter** checks the answer (Shift+Enter inserts a newline). The original is shown with wrong letters underlined, case/punctuation differences dotted, and extra input struck through. **Enter** again goes to the next card.
-5. Buttons (and Alt+1 / Alt+2 / Alt+3): Previous, Mark as hard, Rewrite. Esc on the answer screen rewrites. **Hint** mode shows the cue only and reveals the sentence on Enter, no typing.
+5. Buttons sit in the header, right of the Typing / Hint switch, and keep their place on every card (Alt+1 / Alt+2 / Alt+3): Previous, Mark as hard, Rewrite. Esc on the answer screen rewrites. **Hint** mode shows the cue only and reveals the sentence on Enter, no typing.
 6. After the last card you see a summary: cards, accuracy, average WPM. Then Next chapter, Restart, or Choose a chapter.
 
 **ByHeart: Open Books Folder** opens `~/.byheart/books` in your file manager.
@@ -159,7 +159,7 @@ code --install-extension byheart-0.1.0.vsix
 2. 교재 → 챕터를 고릅니다. 내장 교재만 있으면 바로 챕터 선택으로 갑니다.
 3. 문장을 타이핑합니다. 반투명 힌트는 첫 단어와 둘째 단어의 첫 글자까지 보여 주고, 틀린 글자는 빨간 밑줄과 함께 정답 단어가 아래에 작게 보입니다.
 4. **Enter**로 정답을 확인합니다(Shift+Enter는 줄바꿈). 틀린 글자는 밑줄, 대소문자·구두점 차이는 점선, 불필요한 입력은 취소선으로 보입니다. 다시 **Enter**로 다음 카드.
-5. 버튼(Alt+1 / Alt+2 / Alt+3): 이전, 미암기, 다시 쓰기. 확인 화면에서 Esc는 다시 쓰기. **힌트** 모드는 입력 없이 힌트만 보고 Enter로 원문을 엽니다.
+5. 버튼은 헤더의 타이핑 / 힌트 전환 오른쪽에 있고 카드가 바뀌어도 같은 자리에 있습니다(Alt+1 / Alt+2 / Alt+3): 이전, 미암기, 다시 쓰기. 확인 화면에서 Esc는 다시 쓰기. **힌트** 모드는 입력 없이 힌트만 보고 Enter로 원문을 엽니다.
 6. 마지막 카드 뒤 완료 요약(카드 수·정확도·평균 WPM)과 다음 챕터 / 처음부터 반복 / 챕터 선택 버튼이 나옵니다.
 
 ## 교재 폴더

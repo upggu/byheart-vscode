@@ -50,7 +50,10 @@ export class PracticeView {
     this.modeHint = button(t(locale, 'modeHint'), 'bh-toggle', () => this.actionHandler({ type: 'setMode', mode: 'hint' }));
     modeSwitch.append(this.modeTyping, this.modeHint);
     toggles.append(this.translationToggle, modeSwitch);
-    this.header.append(this.title, this.position, toggles);
+    // Actions live in the header so Reveal/Check/Next stay put no matter how
+    // tall the card content is.
+    this.actions = el('div', 'bh-actions');
+    this.header.append(this.title, this.position, toggles, this.actions);
 
     this.errorBanner = el('div', 'bh-error');
     this.errorBanner.setAttribute('role', 'alert');
@@ -60,8 +63,7 @@ export class PracticeView {
     this.section = el('div', 'bh-section');
     this.speaker = el('div', 'bh-speaker');
     this.body = el('div', 'bh-body');
-    this.actions = el('div', 'bh-actions');
-    this.card.append(this.section, this.speaker, this.body, this.actions);
+    this.card.append(this.section, this.speaker, this.body);
     this.footer = el('div', 'bh-footer muted small');
     this.footer.textContent = t(locale, 'shortcutHint');
     root.replaceChildren(this.header, this.errorBanner, this.card, this.footer);
@@ -162,6 +164,7 @@ export class PracticeView {
         this.actions.replaceChildren(
           this.markButton(),
           this.previousButton(),
+          slot(t(this.locale, 'rehide'), 'bh-secondary bh-reset'),
           button(t(this.locale, 'reveal'), 'bh-primary', () => this.actionHandler({ type: 'reveal' })),
         );
         hintCard.focus();
@@ -175,6 +178,7 @@ export class PracticeView {
       this.actions.replaceChildren(
         this.markButton(),
         this.previousButton(),
+        slot(t(this.locale, 'rewrite'), 'bh-secondary bh-reset'),
         button(t(this.locale, 'check'), 'bh-primary', () => this.actionHandler({ type: 'check', now: Date.now() })),
       );
     }
@@ -202,7 +206,7 @@ export class PracticeView {
     this.actions.replaceChildren(
       this.markButton(),
       this.previousButton(),
-      button(t(this.locale, resetLabel), 'bh-secondary', () => this.actionHandler({ type: 'reset' })),
+      button(t(this.locale, resetLabel), 'bh-secondary bh-reset', () => this.actionHandler({ type: 'reset' })),
       next,
     );
     next.focus();
@@ -216,7 +220,7 @@ export class PracticeView {
     this.body.replaceChildren(text);
     this.appendNotes(card, true);
     const next = button(t(this.locale, 'nextEnter'), 'bh-primary', () => this.actionHandler({ type: 'next' }));
-    this.actions.replaceChildren(this.previousButton(), next);
+    this.actions.replaceChildren(slot(t(this.locale, 'mark'), 'bh-mark'), this.previousButton(), slot(t(this.locale, 'rewrite'), 'bh-secondary bh-reset'), next);
     next.focus();
   }
 
@@ -347,6 +351,15 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, className: string): H
   const node = document.createElement(tag);
   node.className = className;
   return node;
+}
+
+// Invisible stand-in that keeps header buttons in the same place across stages.
+function slot(label: string, className: string): HTMLButtonElement {
+  const b = button(label, `${className} bh-slot`, () => undefined);
+  b.disabled = true;
+  b.tabIndex = -1;
+  b.setAttribute('aria-hidden', 'true');
+  return b;
 }
 
 function button(label: string, className: string, onClick: () => void): HTMLButtonElement {

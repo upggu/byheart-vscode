@@ -48,11 +48,16 @@ button.bh-toggle[aria-pressed='true'], button.bh-mark[aria-pressed='true'] {
 }
 
 .bh-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 8px 16px;
   padding: 14px 0;
   border-bottom: 1px solid var(--bh-border);
+  background: var(--vscode-editor-background);
 }
 .bh-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
 .bh-position { color: var(--bh-muted); font-variant-numeric: tabular-nums; }
@@ -73,8 +78,10 @@ button.bh-toggle[aria-pressed='true'], button.bh-mark[aria-pressed='true'] {
 .bh-section { color: var(--bh-muted); font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
 .bh-speaker { font-weight: 600; margin-bottom: 8px; }
 .bh-body { position: relative; }
-.bh-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-.bh-actions .bh-primary { margin-left: auto; }
+.bh-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-left: auto; }
+.bh-actions .bh-primary { min-width: 7.5em; }
+.bh-actions .bh-reset { min-width: 7em; }
+.bh-actions .bh-slot { visibility: hidden; }
 .bh-footer { margin-top: 20px; }
 .bh-wpm { position: absolute; right: var(--bh-pad); bottom: calc(var(--bh-pad) + 2px); font-variant-numeric: tabular-nums; pointer-events: none; }
 .live-field:has(.live-limited:not([hidden])) + .bh-wpm { bottom: 44px; }
