@@ -18,7 +18,7 @@ code --install-extension byheart-0.1.0.vsix
 
 ## Use
 
-1. Click **$(book) ByHeart** in the status bar (or run **ByHeart: Start Practice**).
+1. Run **ByHeart: Start Practice** from the Command Palette (⇧⌘P / Ctrl+Shift+P). There is no status bar item and no default shortcut; to bind one, open **Preferences: Open Keyboard Shortcuts**, search `byheart.start`, and assign a key.
 2. Pick a book, then a chapter. With only the built-in book present, the picker goes straight to its chapters.
 3. Type the sentence. The faint cue shows the first word and the first letter of the second; errors are underlined in red with the expected word beneath. For a sentence you have not learned yet, turn on **Practice** in the header: the whole sentence shows as the faint cue and you type over it. The setting is remembered.
 4. **Enter** checks the answer (Shift+Enter inserts a newline). The original is shown with wrong letters underlined, case/punctuation differences dotted, and extra input struck through. **Enter** again goes to the next card.
@@ -42,7 +42,7 @@ To add your own book:
 
 1. Create a folder under `~/.byheart/books/`, e.g. `English Quotes`.
 2. Put one or more `.txt` or `.byheart.json` files in it (formats below). Start file names with numbers (`01`, `02`) to control the order.
-3. Click **ByHeart** in the status bar and pick the book, then the chapter. The folder is read each time you open the picker.
+3. Run **ByHeart: Start Practice** and pick the book, then the chapter. The folder is read each time you open the picker.
 
 What is read:
 
@@ -175,7 +175,7 @@ code --install-extension byheart-0.1.0.vsix
 
 ## 사용
 
-1. 상태바의 **$(book) ByHeart**를 누르거나 **ByHeart: 연습 시작** 명령을 실행합니다.
+1. 명령 팔레트(⇧⌘P / Ctrl+Shift+P)에서 **ByHeart: 연습 시작**을 실행합니다. 상태바 항목과 기본 단축키는 없습니다. 단축키를 쓰려면 **기본 설정: 바로 가기 키 열기**에서 `byheart.start`를 찾아 키를 지정하세요.
 2. 교재 → 챕터를 고릅니다. 내장 교재만 있으면 바로 챕터 선택으로 갑니다.
 3. 문장을 타이핑합니다. 반투명 힌트는 첫 단어와 둘째 단어의 첫 글자까지 보여 주고, 틀린 글자는 빨간 밑줄과 함께 정답 단어가 아래에 작게 보입니다. 아직 외우지 않은 문장은 헤더의 **연습**을 켜면 문장 전체가 반투명 힌트로 깔리고 그 위에 따라 칩니다. 켜고 끈 상태는 기억합니다.
 4. **Enter**로 정답을 확인합니다(Shift+Enter는 줄바꿈). 틀린 글자는 밑줄, 대소문자·구두점 차이는 점선, 불필요한 입력은 취소선으로 보입니다. 다시 **Enter**로 다음 카드.
@@ -197,7 +197,7 @@ code --install-extension byheart-0.1.0.vsix
 
 1. `~/.byheart/books/` 아래에 교재 폴더를 만듭니다(예: `영어 명언`).
 2. 그 안에 `.txt`나 `.byheart.json` 파일을 하나 이상 넣습니다(형식은 아래). 순서를 정하려면 파일 이름 앞에 `01`, `02`처럼 번호를 붙입니다.
-3. 상태바의 **ByHeart**를 눌러 교재 → 챕터를 고릅니다. 목록을 열 때마다 폴더를 다시 읽습니다.
+3. **ByHeart: 연습 시작**을 실행해 교재 → 챕터를 고릅니다. 목록을 열 때마다 폴더를 다시 읽습니다.
 
 읽는 규칙:
 

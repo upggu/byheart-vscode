@@ -7,12 +7,10 @@ import { PracticePanel, VIEW_TYPE, type PanelDeps } from './panel';
 import { openBooksFolder, pickChapter } from './picker';
 import { RecordStore } from './records';
 import { resolveRoot } from './settings';
-import { createStatusBar } from './statusbar';
 
 const PREFS_KEY = 'byheart.preferences';
 
 export function activate(context: vscode.ExtensionContext): void {
-  createStatusBar(context);
   const builtin = builtinBooks(context.extensionPath);
   const config = () => vscode.workspace.getConfiguration('byheart');
   const settings = (): Settings => ({ showWpm: config().get<boolean>('showWpm', true) });
