@@ -77,7 +77,7 @@ button.bh-toggle[aria-pressed='true'], button.bh-mark[aria-pressed='true'] {
 .bh-card { padding-top: 20px; }
 .bh-section { color: var(--bh-muted); font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
 .bh-speaker { font-weight: 600; margin-bottom: 8px; }
-.bh-body { position: relative; }
+.bh-field { position: relative; }
 .bh-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-left: auto; }
 .bh-actions .bh-primary { min-width: 7.5em; }
 .bh-actions .bh-reset { min-width: 7em; }

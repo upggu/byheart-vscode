@@ -161,6 +161,7 @@ export class PracticeView {
         hintCard.append(cue);
         hintCard.addEventListener('click', () => this.actionHandler({ type: 'reveal' }));
         this.body.replaceChildren(hintCard);
+        this.appendTranslation(card);
         this.actions.replaceChildren(
           this.markButton(),
           this.previousButton(),
@@ -172,9 +173,13 @@ export class PracticeView {
       return;
     }
     if (fullRender) {
-      this.body.replaceChildren(this.textarea.element);
+      // The field wrapper anchors the WPM label to the textarea, not to the
+      // translation below it.
+      const field = el('div', 'bh-field');
       this.wpmLabel = el('span', 'bh-wpm muted small');
-      this.body.append(this.wpmLabel);
+      field.append(this.textarea.element, this.wpmLabel);
+      this.body.replaceChildren(field);
+      this.appendTranslation(card);
       this.actions.replaceChildren(
         this.markButton(),
         this.previousButton(),
@@ -224,12 +229,16 @@ export class PracticeView {
     next.focus();
   }
 
-  private appendNotes(card: PracticeCard, always = false): void {
+  private appendTranslation(card: PracticeCard, always = false): void {
     if (card.translation && (always || this.state?.prefs.showTranslation)) {
       const tr = el('p', 'bh-translation');
       tr.textContent = card.translation;
       this.body.append(tr);
     }
+  }
+
+  private appendNotes(card: PracticeCard, always = false): void {
+    this.appendTranslation(card, always);
     if (card.explanation) {
       const host = el('div', 'bh-explanation');
       renderExplanation(host, card.explanation);
